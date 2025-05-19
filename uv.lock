@@ -366,13 +366,19 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "bpy" },
+]
+
+[package.dev-dependencies]
+nb = [
     { name = "ipykernel" },
     { name = "numpy" },
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "bpy", specifier = ">=4.4.0" },
+requires-dist = [{ name = "bpy", specifier = ">=4.4.0" }]
+
+[package.metadata.requires-dev]
+nb = [
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "numpy", specifier = "<2" },
 ]

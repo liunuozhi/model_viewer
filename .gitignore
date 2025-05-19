@@ -11,3 +11,9 @@ wheels/
 
 # IDEs
 .vscode/
+
+output/
+data/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
