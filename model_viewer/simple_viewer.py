@@ -131,4 +131,4 @@ if __name__ == "__main__":
     config = SimpleConfig(model_path=Path("./data/model.obj"))
     viewer = SimpleViewer(config)
     viewer.render()
-    viewer.save_blend_file()
+    # viewer.save_blend_file()
