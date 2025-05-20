@@ -88,6 +88,7 @@ class CameraPreset:
 
         return camera
 
+
 class FollowCameraPreset:
     def add_follow_camera(
         self,

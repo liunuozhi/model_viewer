@@ -17,3 +17,6 @@ data/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# cache
+.ruff_cache/
