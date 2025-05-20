@@ -11,7 +11,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, current_dir)
 
 # Now import package
-from model_viewer.simple_viewer import SimpleConfig, SimpleViewer
+from model_viewer.deprecated.simple_viewer import SimpleConfig, SimpleViewer
 
 if __name__ == "__main__":
     config = SimpleConfig(model_path=Path("./data/model.obj"))
