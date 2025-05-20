@@ -20,8 +20,16 @@ class SimpleViewer(
     CameraPreset,
     ManyAreaLightsPreset,
 ):
-    def __init__(self):
+    def __init__(
+        self,
+        width: int = 1080,
+        height: int = 1080,
+        transparent_background: bool = True,
+    ):
         super().__init__()
+        self.resolution = (width, height)
+        self.transparent_background = transparent_background
+
         self.camera = None
         self.setup_scene()
 
@@ -58,12 +66,12 @@ class SimpleViewer(
 
     def render(self, output_path: Path) -> Any:
         R = bpy.context.scene.render
-        R.resolution_x = 1080
-        R.resolution_y = 1080
-        R.film_transparent = True
+        R.resolution_x = self.resolution[0]
+        R.resolution_y = self.resolution[1]
+        R.film_transparent = self.transparent_background
         R.image_settings.file_format = "PNG"
         R.image_settings.color_mode = "RGBA"
-        R.filepath = self.path_to_str(output_path)
+        R.filepath = self.path_to_str(output_path / "render.png")
 
         bpy.context.scene.camera = self.camera
         bpy.ops.render.render(animation=False, write_still=True)

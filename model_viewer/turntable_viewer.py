@@ -8,8 +8,15 @@ from .simple_viewer import SimpleViewer
 
 
 class TurntableViewer(SimpleViewer, FollowCameraPreset):
-    def __init__(self):
-        super().__init__()
+    def __init__(
+        self,
+        width: int = 1080,
+        height: int = 1080,
+        transparent_background: bool = True,
+        num_frames: int = 5,
+    ):
+        super().__init__(width, height, transparent_background)
+        self.num_frames = num_frames
 
     def setup_scene(self) -> Any:
         # This target is for a look-at point.
@@ -36,15 +43,15 @@ class TurntableViewer(SimpleViewer, FollowCameraPreset):
         output_path.mkdir(parents=True, exist_ok=True)
 
         R = bpy.context.scene.render
-        R.resolution_x = 1080
-        R.resolution_y = 1080
-        R.film_transparent = True
+        R.resolution_x = self.resolution[0]
+        R.resolution_y = self.resolution[1]
+        R.film_transparent = self.transparent_background
         R.image_settings.file_format = "PNG"
         R.image_settings.color_mode = "RGBA"
 
         bpy.context.scene.camera = self.camera
 
-        total_frames = 5
+        total_frames = self.num_frames
 
         for i in range(total_frames):
             self.follow_ctr.offset = (
