@@ -10,12 +10,11 @@ from .simple_viewer import SimpleViewer
 class TurntableViewer(SimpleViewer, FollowCameraPreset):
     def __init__(
         self,
-        width: int = 1080,
-        height: int = 1080,
-        transparent_background: bool = True,
         num_frames: int = 5,
+        *args: Any,
+        **kwargs: Any,
     ):
-        super().__init__(width, height, transparent_background)
+        super().__init__(*args, **kwargs)
         self.num_frames = num_frames
 
     def setup_scene(self) -> Any:

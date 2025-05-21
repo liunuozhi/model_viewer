@@ -25,11 +25,14 @@ class SimpleViewer(
         width: int = 1080,
         height: int = 1080,
         transparent_background: bool = True,
+        up: str = "Z",
+        forward: str = "Y",
     ):
         super().__init__()
         self.resolution = (width, height)
         self.transparent_background = transparent_background
-
+        self.model_up_axis = up  # control import model
+        self.model_forward_axis = forward  # control import model
         self.camera = None
         self.setup_scene()
 
@@ -54,7 +57,11 @@ class SimpleViewer(
     def load_model(self, model_path: Path) -> Any:
         assert model_path.suffix == ".obj"
         filepath = self.path_to_str(model_path)
-        bpy.ops.wm.obj_import(filepath=filepath)
+        bpy.ops.wm.obj_import(
+            filepath=filepath,
+            forward_axis=self.model_forward_axis,
+            up_axis=self.model_up_axis,
+        )
 
         obj = bpy.context.object
         scale_to_unit_cube(obj)

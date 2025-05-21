@@ -50,8 +50,15 @@ class SimpleConfig:
     """Configuration for the simple viewer."""
 
     width: int = 1080
+    """Width of the rendered image."""
     height: int = 1080
+    """Height of the rendered image."""
     transparent_background: bool = True
+    """Whether to use a transparent background."""
+    up: str = "Z"
+    """Up axis of the imported model."""
+    forward: str = "Y"
+    """Forward axis of the imported model."""
 
 
 def run_simple(
