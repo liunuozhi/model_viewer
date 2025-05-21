@@ -31,7 +31,11 @@ class TurntableViewer(SimpleViewer, FollowCameraPreset):
         )
 
         # Add a camera following a path.
-        follow_path = self.create_follow_path()
+        follow_path = self.create_circle_path(
+            radius=self.camera_distance,
+            center=(0, 0, self.camera_height),
+        )
+
         self.camera, self.follow_ctr = self.add_follow_camera(
             location=(0, 0, 0),
             track_target=target,
@@ -60,14 +64,14 @@ class TurntableViewer(SimpleViewer, FollowCameraPreset):
             R.filepath = self.path_to_str(file_path)
             bpy.ops.render.render(animation=False, write_still=True)
 
-    def create_follow_path(
+    def create_circle_path(
         self,
         radius: float = 3.0,
-        location: tuple[float, float, float] = (0, 0, 1),
-    ) -> None:
+        center: tuple[float, float, float] = (0, 0, 1),
+    ) -> bpy.types.Object:
         bpy.ops.curve.primitive_bezier_circle_add(
             radius=radius,
-            location=location,
+            location=center,
         )
         return bpy.context.object
 

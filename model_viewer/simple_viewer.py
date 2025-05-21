@@ -25,6 +25,8 @@ class SimpleViewer(
         width: int = 1080,
         height: int = 1080,
         transparent_background: bool = True,
+        camera_height: float = 1.0,
+        camera_distance: float = 3.0,
         up: str = "Z",
         forward: str = "Y",
     ):
@@ -33,6 +35,8 @@ class SimpleViewer(
         self.transparent_background = transparent_background
         self.model_up_axis = up  # control import model
         self.model_forward_axis = forward  # control import model
+        self.camera_height = camera_height
+        self.camera_distance = camera_distance
         self.camera = None
         self.setup_scene()
 
@@ -50,7 +54,7 @@ class SimpleViewer(
         )
         # Add a camera.
         self.camera = self.add_camera(
-            location=(0, 3, 1),
+            location=(0, self.camera_distance, self.camera_height),
             track_target=target,
         )
 

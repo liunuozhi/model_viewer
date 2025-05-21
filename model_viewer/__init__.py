@@ -1,6 +1,6 @@
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Protocol, Type
+from typing import Any, Literal, Protocol, Type
 
 from .simple_viewer import SimpleViewer
 from .turntable_viewer import TurntableViewer
@@ -45,19 +45,28 @@ def _run(
         viewer.save_blend_file(output_dir / "model.blend")
 
 
+MODEL_ORIENTATION_AXIS = Literal[
+    "X", "Y", "Z", "NEGATIVE_X", "NEGATIVE_Y", "NEGATIVE_Z"
+]
+
+
 @dataclass
 class SimpleConfig:
     """Configuration for the simple viewer."""
 
+    camera_height: float = 1.0
+    """Height of the camera."""
+    camera_distance: float = 3.0
+    """Distance of the camera from the model."""
     width: int = 1080
     """Width of the rendered image."""
     height: int = 1080
     """Height of the rendered image."""
     transparent_background: bool = True
     """Whether to use a transparent background."""
-    up: str = "Z"
+    up: MODEL_ORIENTATION_AXIS = "Z"
     """Up axis of the imported model."""
-    forward: str = "Y"
+    forward: MODEL_ORIENTATION_AXIS = "Y"
     """Forward axis of the imported model."""
 
 
