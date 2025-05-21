@@ -37,7 +37,9 @@ def _run(
     else:
         file_list = model_path.glob("*.obj")
         for path in file_list:
-            process(viewer, path, output_dir)
+            # for each model, create a new output directory
+            model_output_dir = output_dir / path.stem
+            process(viewer, path, model_output_dir)
 
     if save_to_blend:
         viewer.save_blend_file(output_dir / "model.blend")
