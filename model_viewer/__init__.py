@@ -68,6 +68,8 @@ class SimpleConfig:
     """Up axis of the imported model."""
     forward: MODEL_ORIENTATION_AXIS = "Y"
     """Forward axis of the imported model."""
+    apply_default_material: bool = True
+    """Whether to apply default material to loaded models."""
 
 
 def run_simple(

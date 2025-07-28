@@ -110,3 +110,33 @@ class FollowCameraPreset:
             track_to.up_axis = "UP_Y"
 
         return camera, follow_ctr
+
+
+class MaterialPreset:
+    def add_default_material(
+        self,
+        target_object: bpy.types.Object,
+        material_name: str = "DefaultMaterial",
+        base_color: tuple[float, float, float, float] = (0.8, 0.8, 0.8, 1.0),
+        metallic: float = 0.0,
+        roughness: float = 0.5,
+        specular: float = 0.5,
+    ):
+        # Create new material
+        material = bpy.data.materials.new(name=material_name)
+        material.use_nodes = True
+        
+        # Get the principled BSDF node
+        bsdf = material.node_tree.nodes["Principled BSDF"]
+        bsdf.inputs[0].default_value = base_color  # Base Color
+        bsdf.inputs[1].default_value = metallic    # Metallic
+        bsdf.inputs[2].default_value = roughness   # Roughness  
+        bsdf.inputs[7].default_value = specular    # Specular IOR
+        
+        # Assign material to object
+        if target_object.data.materials:
+            target_object.data.materials[0] = material
+        else:
+            target_object.data.materials.append(material)
+            
+        return material

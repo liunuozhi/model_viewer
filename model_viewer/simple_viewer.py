@@ -7,6 +7,7 @@ from .base import BaseViewer
 from .presets import (
     CameraPreset,
     ManyAreaLightsPreset,
+    MaterialPreset,
     SunLightPreset,
     TrackTargetPreset,
 )
@@ -19,6 +20,7 @@ class SimpleViewer(
     TrackTargetPreset,
     CameraPreset,
     ManyAreaLightsPreset,
+    MaterialPreset,
 ):
     def __init__(
         self,
@@ -29,6 +31,7 @@ class SimpleViewer(
         camera_distance: float = 3.0,
         up: str = "Z",
         forward: str = "Y",
+        apply_default_material: bool = True,
     ):
         super().__init__()
         self.resolution = (width, height)
@@ -37,6 +40,7 @@ class SimpleViewer(
         self.model_forward_axis = forward  # control import model
         self.camera_height = camera_height
         self.camera_distance = camera_distance
+        self.apply_default_material = apply_default_material
         self.camera = None
         self.setup_scene()
 
@@ -70,6 +74,10 @@ class SimpleViewer(
         obj = bpy.context.object
         scale_to_unit_cube(obj)
         move_object_to_center(obj)
+        
+        if self.apply_default_material:
+            self.add_default_material(obj)
+        
         return obj
 
     def unload_model(self, obj: bpy.types.Object) -> Any:
