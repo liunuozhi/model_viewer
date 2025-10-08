@@ -40,3 +40,9 @@ uv run main.py simple --model-path file.obj --output-dir output --config.apply-d
 # Skip default material application
 uv run main.py simple --model-path file.obj --output-dir output --config.no-apply-default-material
 ```
+
+## Creating GIFs from Image Sequences
+
+```bash
+python3 scripts/create_gifs.py -i output/texture_outs -o output/gifs
+```
